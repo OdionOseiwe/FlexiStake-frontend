@@ -1,4 +1,3 @@
-import React from 'react'
 import Tether from '../images/tether.svg'
 
 export default function Stats() {
