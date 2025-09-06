@@ -1,0 +1,2 @@
+export const TokenAddress =   '0x265a340F1bDA581D6b20c2AB6676B951aAF4FdA2'
+export const StakeAddress =   '0xC44ED726306b4fe8DEd3581E00729e6EE6F60824'
