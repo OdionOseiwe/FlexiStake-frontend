@@ -13,12 +13,13 @@ import StakeAbi from "../ABI/StakeAbi.json";
 import { GetTierNumber } from "../utils/Tier";
 import { formatEther, parseUnits } from "ethers";
 import { StakeAddress } from "../utils/Address";
-import { useAccount } from "wagmi";
+import { useAccount,useNetwork } from "wagmi";
 import { convertEpochToDays } from "../utils/EpochConverter";
 type ModalType = "withdraw" | "emergency" | "claim" | null;
 
 export default function Stake() {
   const { address, isConnected } = useAccount();
+  const { chain } = useNetwork();
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   const [formData, setFormData] = useState({
     stakeAmount: "",
@@ -76,12 +77,21 @@ export default function Stake() {
     args: [address, GetTierNumber(rewardsTier)],
   });
 
+
   if (isStakeLoading && isRewardLoading) {
     return (
       <div className="grid justify-center">
         <Loader color="#3e9392" size={50} />
       </div>
     );
+  }
+
+  if(chain.id != 11155111){
+    return(
+      <div className="grid justify-center">
+        <h1 className="text-2xl text-white text-center">Connect to Ethereum Sepolia</h1>
+      </div>
+    )
   }
 
   return (
