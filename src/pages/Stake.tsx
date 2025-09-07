@@ -13,13 +13,12 @@ import StakeAbi from "../ABI/StakeAbi.json";
 import { GetTierNumber } from "../utils/Tier";
 import { formatEther, parseUnits } from "ethers";
 import { StakeAddress } from "../utils/Address";
-import { useAccount,useNetwork } from "wagmi";
+import { useAccount } from "wagmi";
 import { convertEpochToDays } from "../utils/EpochConverter";
 type ModalType = "withdraw" | "emergency" | "claim" | null;
 
 export default function Stake() {
-  const { address, isConnected } = useAccount();
-  const { chain } = useNetwork();
+  const { address, isConnected , chainId} = useAccount();
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   const [formData, setFormData] = useState({
     stakeAmount: "",
@@ -86,17 +85,17 @@ export default function Stake() {
     );
   }
 
-  if(chain.id != 11155111){
-    return(
-      <div className="grid justify-center">
-        <h1 className="text-2xl text-white text-center">Connect to Ethereum Sepolia</h1>
-      </div>
-    )
-  }
 
   return (
     <div className="md:px-12  md:py-6 bg-linear-to-br from-fuchsia-950 to-blue-950 brighteness-50 h-full min-h-screen">
       <ConnectButton client={client} />
+      {
+        isConnected &&chainId != 11155111  ?
+            <div className="grid justify-center">
+              <h1 className="text-2xl text-red-800 text-center">Connect to Ethereum Sepolia</h1>
+            </div> : ""
+          
+      }
       <div className="flex flex-wrap justify-around mt-10">
         <div
           className="bg-linear-to-b from-blue-700 to-fuchsia-950 md:border-t-1 rounded-3xl mx-2 md:p-6 p-3 brightness-110 hover:-translate-y-2 
