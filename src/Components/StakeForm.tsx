@@ -45,7 +45,7 @@ function StakeForm({ stakeAmount, setStakeAmount }: StakeFormProps) {
       <div>
         <h1 className="md:text-2xl text-xl"> Stake Tokens</h1>
 
-        <p className="mt-4 text-fuchsia-950 font-extralight">
+        <p className="mt-4 font-extralight">
           APR value:{" "}
           {isConnected && !loadingBasicAPR && (
             <span className="ml-2 font-bold">
@@ -54,15 +54,15 @@ function StakeForm({ stakeAmount, setStakeAmount }: StakeFormProps) {
           )}
         </p>
 
-        <p className="mt-4 text-gray-500 text-l font-bold">
+        <p className="mt-4 text-l font-bold">
           Stake your tokens in Tier 1, 2, or 3. Earn interest as you stake,{" "}
           <br />
           plus bonus rewards for completing the full tier — 1.5× in Tier 2, 3×
           in Tier 3
         </p>
         <div
-          className="flex justify-between items-center bg-fuchsia-950 p-6 h-16 brightness-125 
-                      rounded-xl shadow-2xl shadow-blue-700 mt-5 text-gray-500"
+          className="flex justify-between items-center 
+         mt-5 "
         >
           <div className="flex items-center">
             <div className="mr-2">
@@ -82,8 +82,8 @@ function StakeForm({ stakeAmount, setStakeAmount }: StakeFormProps) {
           <input
             onChange={(e) => setStakeAmount(e.target.value)}
             value={stakeAmount}
-            className="flex justify-between items-center bg-fuchsia-950 p-4 w-full h-16 brightness-125 mb-6 
-                    rounded-xl shadow-2xl shadow-blue-700 mt-1 text-gray-500 focus:border-none focus:outline-0 text-2xl"
+            className="flex justify-between items-center p-4 w-full h-16 brightness-125 mb-6 
+                  border-1   rounded-full mt-1 text-gray-500 focus:border-1 focus:outline-0 text-2xl"
             type="text"
             placeholder="0.0"
           />
