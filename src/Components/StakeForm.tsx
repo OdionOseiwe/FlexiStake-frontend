@@ -38,12 +38,7 @@ function StakeForm({ stakeAmount, setStakeAmount }: StakeFormProps) {
       alert("Stake successful!");
       setStakeAmount("");
     }
-  };
-
-  const CutEther =() =>{
-    const str_a = formatEther(String(basicAPR)).toString();
-    return Number(str_a.slice(0, 6));  
-  }
+  };  
 
   return (
     <>
@@ -54,7 +49,7 @@ function StakeForm({ stakeAmount, setStakeAmount }: StakeFormProps) {
           APR value:{" "}
           {isConnected && !loadingBasicAPR && (
             <span className="ml-2 font-bold">
-              {CutEther()}%
+              {Number(basicAPR)/ 100}%
             </span>
           )}
         </p>
