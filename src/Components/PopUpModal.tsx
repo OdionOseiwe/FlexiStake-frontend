@@ -17,11 +17,8 @@ const PopUpModal: React.FC<PopUpModalProps> = ({
   onConfirm,
 }) => {
   return (
-    <div
-      className="
-        p-4 absolute bottom-50 md:left-50 bg-zinc-300 rounded-2xl
-      "
-    >
+    <div className="fixed inset-0 flex items-center justify-center bg-black ">
+      <div className="p-6 bg-zinc-300 rounded-2xl ">    
       <p className="flex justify-end cursor-pointer">
         <button onClick={onClose}>
           <X className="cursor-pointer" />
@@ -46,6 +43,7 @@ const PopUpModal: React.FC<PopUpModalProps> = ({
           {message || 'Are you sure you want to proceed with this action?'}
         </p>
       </form>
+    </div>
     </div>
   );
 };
