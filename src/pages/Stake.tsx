@@ -18,7 +18,7 @@ import { convertEpochToDays } from "../utils/EpochConverter";
 type ModalType = "withdraw" | "emergency" | "claim" | null;
 
 export default function Stake() {
-  const { address, isConnected , chainId} = useAccount();
+  const { address, isConnected, status, chain, chainId} = useAccount();
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   const [formData, setFormData] = useState({
     stakeAmount: "",
@@ -85,28 +85,23 @@ export default function Stake() {
     );
   }
 
+  console.log('chain', chain, 'connected', isConnected, address, status, chainId);
+  
 
   return (
     <div className="md:px-12  md:py-6 h-full min-h-screen">
       <ConnectButton client={client} />
-      {
-        isConnected &&chainId != 11155111  ?
-            <div className="grid justify-center">
-              <h1 className="text-2xl text-red-800 text-center">Connect to Ethereum Sepolia</h1>
-            </div> : ""
-          
-      }
-       {isConnected ?  (
+    
+      {isConnected && chainId === 11155111? (
+        <div className="flex flex-wrap justify-around mt-10">
+          <div className="rounded-3xl mx-2 md:p-6 p-3 shadow-lg">
+            <StakeForm
+              stakeAmount={formData.stakeAmount}
+              setStakeAmount={(p) =>
+                setFormData({ ...formData, stakeAmount: p })
+              }
+            />
 
-      <div className="flex flex-wrap justify-around mt-10">
-        <div
-          className="rounded-3xl mx-2 md:p-6 p-3 shadow-lg"
-        >
-          <StakeForm
-            stakeAmount={formData.stakeAmount}
-            setStakeAmount={(p) => setFormData({ ...formData, stakeAmount: p })}
-          />
-        
             <div className=" md:p-6 p-3 rounded-2xl mt-8">
               <p className="flex justify-end">
                 <Dropdown tier={rewardsTier} setTier={setRewardsTier} />
@@ -191,15 +186,15 @@ export default function Stake() {
                 )}
               </div>
             </div>
-          
-        </div>
+          </div>
 
-        <div>
-          <Stats />
+          <div>
+            <Stats />
+          </div>
         </div>
-      </div>
-       ) : <div> Connect wallet</div>
-      }
+      ) : (
+        <div className="text-2xl text-red-700"> connect to Ethereum Sepolia  </div>
+      )}
     </div>
   );
 }
