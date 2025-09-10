@@ -85,8 +85,7 @@ export default function Stake() {
     );
   }
 
-  console.log('chain', chain, 'connected', isConnected, address, status, chainId);
-  
+  console.log('chain', chain);
 
   return (
     <div className="md:px-12  md:py-6 h-full min-h-screen">
